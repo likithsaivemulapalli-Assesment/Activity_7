@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity 7 – MultiView Brushing</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles/style.css">
+
+  <!-- D3 + our JS -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="js/scatterplot.problem.js"></script>
+</head>
+<body>
+
+  <h1 style="text-align:center;">Activity 7 – MultiView + Brushing</h1>
+
+  <div id="container">
+    <div id="figure1" class="chart"></div>
+    <div id="figure2" class="chart"></div>
+  </div>
+
+  <h2>Selected Cars</h2>
+  <ul id="selected-list"></ul>
+
+  <script>
+    // Load data and create both scatterplots
+    d3.csv("data/car_sample_data.csv").then(data => {
+      data.forEach(d => {
+        d.Price = +d.Price;
+        d.MPG = +d.MPG;
+        d.EngineSizeCI = +d.EngineSizeCI;
+        d.Weight = +d.Weight;
+      });
+
+      // First plot: MPG vs Price
+      scatter_plot(
+        data,
+        "#figure1",
+        "MPG vs Price",
+        "Price",
+        "MPG",
+        "Weight",
+        "Country",
+        150
+      );
+
+      // Second plot: MPG vs Engine Size
+      scatter_plot(
+        data,
+        "#figure2",
+        "MPG vs Engine Size",
+        "EngineSizeCI",
+        "MPG",
+        "Weight",
+        "Country",
+        150
+      );
+    });
+  </script>
+
+</body>
+</html>
